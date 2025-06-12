@@ -1857,12 +1857,27 @@
       const contenedor = document.getElementById('productos');
       contenedor.innerHTML = '<div class="cargando"><div class="spinner"></div><p>Cargando productos...</p></div>';
 
-      fetch(PROXY_URL + SUPABASE_URL, {
-  headers: {
-    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5cnNsbnFnZnlrY2dwb2Rrdm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkyNzIsImV4cCI6MjA2MzY5NTI3Mn0.7zH1_90IcRCERdWT5kaUAe667zZ5t0DXX7Ht18lGhMI',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5cnNsbnFnZnlrY2dwb2Rrdm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkyNzIsImV4cCI6MjA2MzY5NTI3Mn0.7zH1_90IcRCERdWT5kaUAe667zZ5t0DXX7Ht18lGhMI'
+     async function cargarProductos() {
+  const SUPABASE_URL = "https://ayrslnqgfykcgpodkvot.supabase.co/rest/v1/productos";
+  
+  try {
+    const response = await fetch(SUPABASE_URL, {
+      headers: {
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5cnNsbnFnZnlrY2dwb2Rrdm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkyNzIsImV4cCI6MjA2MzY5NTI3Mn0.7zH1_90IcRCERdWT5kaUAe667zZ5t0DXX7Ht18lGhMI',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5cnNsbnFnZnlrY2dwb2Rrdm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkyNzIsImV4cCI6MjA2MzY5NTI3Mn0.7zH1_90IcRCERdWT5kaUAe667zZ5t0DXX7Ht18lGhMI'
+      }
+    });
+
+    if (!response.ok) throw new Error('Error en la respuesta de Supabase');
+    
+    const productos = await response.json();
+    return productos;
+    
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+    return []; // Retorna array vacío en caso de error
   }
-})
+}
       
       try {
         // Obtener productos de la base de datos Supabase
