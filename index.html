@@ -1856,6 +1856,13 @@
     async function cargarProductos() {
       const contenedor = document.getElementById('productos');
       contenedor.innerHTML = '<div class="cargando"><div class="spinner"></div><p>Cargando productos...</p></div>';
+
+      fetch(PROXY_URL + SUPABASE_URL, {
+  headers: {
+    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5cnNsbnFnZnlrY2dwb2Rrdm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkyNzIsImV4cCI6MjA2MzY5NTI3Mn0.7zH1_90IcRCERdWT5kaUAe667zZ5t0DXX7Ht18lGhMI',
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5cnNsbnFnZnlrY2dwb2Rrdm90Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTkyNzIsImV4cCI6MjA2MzY5NTI3Mn0.7zH1_90IcRCERdWT5kaUAe667zZ5t0DXX7Ht18lGhMI'
+  }
+})
       
       try {
         // Obtener productos de la base de datos Supabase
